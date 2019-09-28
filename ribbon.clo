@@ -1,0 +1,80 @@
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesFile{ribbon.clo}
+  [2019/09/26 v1.0 (ribbon column tikz definition)]
+
+% 定義奇數頁糸欄
+\def\@ribonodd{%
+\foreach \q in {60.5,102.5,...,480}{%
+	\foreach \k in {94,154,...,635}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+36 pt, \k+30 pt);}}
+\foreach \q in {522.5,564.5,...,901}{%
+	\foreach \k in {94,154,...,635}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+36 pt, \k+30 pt);}}
+%
+	\foreach \i in {60.5,102.5,...,940}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 64 pt)--(\i pt, 664 pt);}
+	\foreach \j in {96.5,138.5,...,901}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 64 pt)--(\j pt, 664 pt);}
+	\node [below,]  at%
+		(498.5 pt, 550 pt ) {\hbox{\tate\@tfish}};
+	\node [above,]  at%
+		(498.5 pt, 178 pt ) {\hbox{\tate\@bfish}};
+		}% 奇數頁絲欄
+
+% 定義偶數頁糸欄
+\let\@riboneven\@empty
+
+% 定義\chapter{}的首頁糸欄有標題不畫欄線。
+\def\@chribonodd{
+\foreach \q in {60.5,102.5,...,480}{%
+	\foreach \k in {94,154,...,635}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+36 pt, \k+30 pt);}}
+\foreach \q in {522.5,564.5,...,817}{%
+	\foreach \k in {94,154,...,635}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+36 pt, \k+30 pt);}}
+%
+	\foreach \i in {60.5,102.5,...,860}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 64 pt)--(\i pt, 664 pt);}
+	\foreach \j in {96.5,138.5,...,860}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 64 pt)--(\j pt, 664 pt);}
+	\node [below,]  at%
+		(498.5 pt, 550 pt ) {\hbox{\tate\@tfish}};
+	\node [above,]  at%
+		(498.5 pt, 178 pt ) {\hbox{\tate\@bfish}};
+		}% 奇數頁絲欄
+
+% 定義奇數頁内外邉框
+\def\@kasenodd{%
+%	\draw [line width=3pt, color=\@columncolor ]  (54 pt, 58 pt) rectangle (942.5 pt,670 pt);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (60.5 pt, 64 pt) rectangle (936.5 pt,664 pt);% 內框
+	}
+% 定義偶數頁内外邉框
+\let\@kaseneven\@empty
+
+\def\@pdfmpageodd{%
+\ifthenelse{\value{page} < 1}{%
+	\node [right,]  at%
+		(522 pt ,50 pt) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}%
+		\stepcounter{szpage}};}
+	{\node [right,]  at%
+		(522 pt ,50 pt) {\hbox{\yoko\szx\mgfamily~第~\@arabic\c@ppage~頁\qquad\@signatureodd}%
+		\stepcounter{ppage}};}
+\ifthenelse{\value{page} < 1}{%
+	\node [left,]  at%
+		(480 pt ,50 pt) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}%
+		\stepcounter{szpage}};}
+	{\node [left,]  at%
+		(480 pt ,50 pt) {\hbox{\yoko\szx\mgfamily\@signatureven\qquad~第~\@arabic\c@ppage~頁}%
+		\stepcounter{ppage}};}
+	}
+\let\@pdfmpageven\@empty
+\let\@ppageodd\@empty
+\let\@ppageven\@empty
+
+\endinput
+
+% end of ribbon.clo

@@ -1,0 +1,28 @@
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesFile{test.clo}
+  [2019/09/26 v1.0 (test column tikz definition)]
+
+\if@test  % 針對卷子，需要精確到pt的对齐。
+% 定義奇數頁糸欄、内外邉框
+\def\@kasenodd{%
+	\foreach \i in {11630 , 11595 ,...,3610}{%
+		\draw [ color=\@riboncolor ] (\i pt, 37.5 mm)--(\i pt, 219.5 mm);}
+	\draw [line width=3pt, color=\@columncolor ]  (3610 pt, 35 mm) rectangle (4102 mm ,222 mm);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (3615 pt,37.5 mm) rectangle (4100 mm ,219.5 mm) ;% 內框
+	}
+%
+\let\@ribonodd\@empty
+\let\@kaseneven\@empty
+\let\@riboneven\@empty
+\let\@fishodd\@empty
+\let\@fisheven\@empty
+\let\@pdfmpageodd\@empty
+\let\@pdfmpageven\@empty
+\let\@ppageodd\@empty
+\let\@ppageven\@empty
+\let\@chribonodd\@empty
+\fi
+
+\endinput
+
+% end of test.clo

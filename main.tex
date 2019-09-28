@@ -1,0 +1,262 @@
+% !TEX program = ptex2pdf
+%%		uplatex main
+%%		uplatex main
+%%		dvipdfmx  main.dvi
+
+\documentclass[ribbon]{genko}
+
+% 説明
+% 必選項(他們之間都是互斥的。)
+% pdfm/tgenko/ygenko/ribbon/binsen/test
+%
+% 可選項
+% 紙張選項
+% landscape	選項，將紙張橫放。
+% yoko		選項，設置為橫向書寫方向。
+% tate		選項，設置為縱向書寫方向。（默認）
+% a4paper	或	A4	選項，選擇 A4 紙張。
+% a5paper	或	A5	選項，選擇 A5 紙張。
+% b4paper	或	B4	選項，選擇 B4 紙張。
+% b5paper	或	B5	選項，選擇 B5 紙張。（默認）
+% test		選項，選擇 B5 高度的卷子。長度為4200mm，高度為257mm。測試選項，輸出卷子。
+
+% 頁眉頁碼行爲
+% 橫向頁碼	選項，調用橫向頁碼。默認為縱向書眉+頁碼。
+% 名字/ID/名前	選項，輸入底部和頁碼平齊的 ID。需要【橫向頁碼】選項。
+
+% 版式樣式
+% pdfm		選項，控制騎縫書眉。包括，奇偶公用頁碼、書名、魚尾、象鼻填充等。默認 B5 ，垂直書寫。支持A4、B5.
+% binsen	選項，日式便牋。pdfm 的反面，不要騎縫書眉。默認 B5 ，垂直書寫。支持A4、B5.
+% tgenko	選項，調用橫置的作文紙，A4、B5 兩種紙張，排版效果相同，字號也相同。B5是由A4縮印而來。
+%				%  A5 紙為15x15規格。A4、B5 皆爲 20x20；沒有B4紙張對應的選項。
+% ygenko	選項，調用橫向書寫的作文紙。（待書：B4 作文紙。已决定不支持B4紙。）
+% ribbon	選項，調用日式作文紙。只有 B4 一種幅面。且為 landscape、垂直書寫。
+% test		選項，大唐西域記式卷子。預設長度為 4200 mm，高度為 257 mm。需要較高的 LaTeX 水平。不建議新手使用。
+% pagestyle 説明
+% \pagestyle{plain}			正文。内外邊框、糸欄、水平頁碼、騎縫書眉（pdfm）；内外邉框、糸欄、垂直頁碼（無pdfm）。
+% \pagestyle{my}			前言。只有内外邉框，沒有欄綫。
+% \pagestyle{mytext}		有内外邉框，有欄綫。無書眉，無頁碼。
+% \thispagestyle{chapter}	對 pdfm 模式下騎縫書眉的標題頁修復。
+							%（在有糸欄的版式下使用，此爲必須且可靠的解決辦法。）
+% \thispagestyle{mychapter}	對 pdfm 模式下非騎縫書眉的標題頁修復。
+% \pagestyle{myabstrac}		pdfm 選項下使用的騎縫凡例。無 pdfm 選項則爲垂直書眉的凡例。
+% \pagestyle{mymenu}		pdfm 選項下使用的騎縫目錄。無 pdfm 選項則爲垂直書眉的目錄。
+% \pagestyle{mymyappendix}	pdfm 選項下使用的騎縫附錄。無 pdfm 選項則爲垂直書眉的附錄。
+
+% 嘗試畫一個表格來説明這種選項的搭配。已寫。
+
+% 载入自定义设置
+\usepackage{genkosettings}
+
+% 載入的字體配置信息
+\usepackage{genkofonts}
+
+% 設置的直書冒號禁則。
+\prebreakpenalty`︰=10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 載入的紙張配置信息。此係必須文件。     %%
+\input{pagesizedef.clo}              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maintitle{倚天屠龍記}
+\subtitle{連載版}
+\author{金　庸}
+\authorfn{金　庸}
+
+\usepackage{lineno}
+\maxdeadcycles=2000
+% 行數 x 35
+%\setlength{\TEXTLENGTH}{-2469.44 mm}
+
+%\voffset=-10 mm
+%\hoffset=-100 mm
+\begin{document}
+
+\Large
+ \pagestyle{empty}
+\setlength{\parindent}{ 0 pt}
+
+
+
+
+
+\pagestyle{plain}
+%\linenumbers
+
+\ugenkokaib
+\normalsize
+%大唐西域記 \hfill{尚書左僕射燕國公于志寧}\hspace*{2zw} 
+
+\input{test.tex}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+\userelfont\ujlreq
+
+%%%%%% 封面 %%%%%%
+\pagecolor{konjou}
+
+%\maketitle
+
+%\cleardoublepage
+
+%\setcounter{page}{-9}
+\pagecolor{white}
+%\pagecolor{ikkonzome} % 一斤染
+%\pagecolor{sakurairo} % 樱色 少女粉
+%\pagecolor{shiou!60}
+
+ \pagestyle{empty}
+
+
+
+\begin{center}
+\begin{minipage}<y>[htpb]{160mm}
+\fontsize{12pt}{18}\selectfont\ttfamily
+{\LARGE\centering\gt 簡易説明\\}
+
+\空行
+
+此預覽版使用之前需配置用戶本地字體，在 genkofonts.sty 中，125 行起。
+
+將其中的字體替換爲用戶本地字體，格式如示例。
+
+日文字體使用 UniJIS2004-UTF16-H/V 作爲 CMAP 映射。
+
+中文字體使用 UniGB-UTF16-H/V 作爲映射，或者使橫書字體使用 unicode ，
+
+直書字體使用 unicode 竝使用 -w 1 參數，將漢字參考方向旋轉90°。
+
+
+\空行
+
+{\LARGE\centering\gt 項目文件簡要描述\\}
+
+\空行
+
+\begin{biao}[項目文件簡要描述文件]
+\item[genko.cls] class文件。對 菅野 善久 老師的 genko （原稿紙）的重寫。
+\item[colordef.clo] class 使用的顔色定義文件。
+\item[pdfm.clo] 騎縫書眉使用的罣綫、邉框、書眉、頁碼等的tikz定義。
+\item[binsen.clo] 便箋紙使用的定義，pdfm 的否定狀態。
+\item[tgenko.clo] 垂直書寫作文紙的網格定義。
+\item[ygenko.clo] 水平書寫作文紙的網格定義。
+\item[ribbon.clo] 日式JIS B4作文紙的網格定義。
+\item[test.clo] 大唐西域記式卷子本的定義。每製作一次卷子，都需要重新定義。
+\item[pagesizedef.clo] class 使用的外部判斷，主要是判斷紙張尺寸，以及對應的平衡參數。
+\item[genkoid.tex] 頁脚使用的姓名文本。用戶自定義。
+\item[genkofonts.sty] 自用字體的 NFSS2 配置。主要針對作文紙一字一格，使用刪掉glue和kern表的虛擬字體。
+\item[genkosettings.sty] 配套的設置文件。
+\item[tochu.sty] 頭注包文件。本模板未使用。若使用頭注包，則需重構 pagesizedef.clo 中的 voffset 參數。
+\item[warichus.sty] 割注包文件。本模板未使用。
+\item[jcolor.sty] 日式顔色包文件。
+\item[jcolor.tex] 日式顔色包説明文件。
+\item[main.tex] 本文。
+\item[test.tex] 測試文本。
+\item[TFM文件夾] 自製虛擬字體向量信息文件（TFM）。
+\item[VF 文件夾] 自製虛擬字體。安裝方法，將此兩個文件夾拷貝到 \verb+C:\texlive\texmf-local\fonts+ %
+下對應的目錄中，再執行 \verb+mktexlsr+。
+\end{biao}
+\end{minipage}
+\end{center}
+
+\end{document}
+
+
+
+
+
+
+%\vspace*{\baselineskip}
+\begin{center}
+\begin{minipage}<y>[htpb]{180mm}
+\fontsize{12pt}{18}\selectfont\ttfamily
+{\LARGE\centering\gt 本項目支持的紙張及選項明細}\\[2mm]
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+
+項目 & {\color{shuiro}pdfm} & {\color{shuiro}binsen} & {\color{shuiro}tgenko} & {\color{shuiro}ygenko} & {\color{shuiro}ribbon} & {\color{shuiro}作文紙} & {\color{shuiro}test} & 注 \\ \hline
+a3paper & ╳ & ╳ & ╳ & ◯ & ╳ & ◯ &  ╳ & \\ \hline
+a4paper & ◯ & ◯ & ◯ & ◯ & ╳ & ╳ & ╳ & \\ \hline
+a5paper & ╳ & ╳ & ◯ & ◯ & ╳ & ╳ & ╳ & \\ \hline
+b4paper & ╳ & ╳ & ╳ & ◯ & ◯ & ╳ & ╳ & \\ \hline
+b5paper & ◯ & ◯ & ◯ & ◯ & ╳ & ╳ & ╳ & \\ \hline
+landscape & ╳ & ╳ & ◯ & ◯ & ◯ & ◯ & ◯ & 紙張橫置 \\ \hline
+tate & ◯ & ◯ & ◯ & ╳ & ◯ & ╳ & ◯ & 直書 \\ \hline
+yoko & ╳ & ╳ & ╳ & ◯ & ╳ & ◯ & ◯ & 橫書 \\ \hline
+橫向頁碼 & ◯ & ◯ & ◯ & ◎ & ◯ & ╳ & ╳ & \\ \hline
+名字 & ◯ & ◯ & ◯ & ◎ & ◯ & ╳ & ╳ & \\ \hline
+test & ╳ & ╳ & ╳ & ╳ & ╳ & ╳ & ◯ & 卷子本 \\ \hline
+注 & 騎縫書眉 & 日式便箋 & 直書作文紙 & 橫書作文紙 & 日式B4作文紙 & 考試用作文紙 & 卷子本& \\ \hline
+古典書式 & 永樂大典式 & 紅樓夢式 & & &  & & 大唐西域記式 &  \\ \hline
+
+\end{tabular}
+
+\vskip5mm
+注1：表中，支持用 ◯ 表示，不支持用 ╳ 表示。部分支持用 ◎ 表示。\\[1mm]
+注2：紅色為必選項，且它們之間為互斥関係。\\[1mm]
+注3：四庫全書式過幾天再寫。
+\end{minipage}
+\end{center}
+
+\end{document}
+
+
+
+
+
+
+
+\begin{center}
+\begin{minipage}<y>[htpb]{160mm}
+\fontsize{12pt}{18}\selectfont\ttfamily
+
+{\LARGE\centering\gt 支持調用的選項\\}
+
+\空行
+
+\begin{biao}[項目文件]
+\item[b5paper,tate,final,openleft,twoside,onecolumn,淺朱,LightRed] %
+\item[] 默認選項：B5 紙張，直書，終稿，左開，雙邉，單欄；書眉文字為淺朱，欄目顔色為淺朱（LightRed）。
+ 此默認選項不含版式，所以必須再選擇版式，否則將出錯。
+\item[pdfm] 騎縫書眉。此版式為永樂大典式，葉 16 欄，每欄兩行，行 32 字，行首空四格。
+欄寬 52 pt，行寬 26 pt。頁 448 字，葉 896 字。若使用頭注，則需重構 pagesizedef.clo 中的 voffset 參數。
+只支持 A4 B5 紙張，使用其他紙張將出錯。
+\item[binsen] 便箋紙使用的定義，pdfm 的否定狀態。不使用騎縫書眉。
+只支持 A4 B5 紙張，使用其他紙張將出錯。
+\item[tgenko] 直書作文紙，默認 landscape 選項。頁面規格 20x20.
+只支持 A4 B5 A5 紙張，使用其他紙張將出錯。B5 紙張由 A4 縮放得到。
+A4 B5 頁面規格 20x20. A5 頁面規格 15x15.
+\item[ygenko] 橫書作文紙，支持 A3 A4 A5 B5 紙張。選擇 B4 紙張將出錯。
+其中 A3 默認 landscape 選項。B5 紙張由 A4 縮放得到。
+A4 B5 頁面規格 20x20. A5 頁面規格 15x15. 此 A3 由兩張 A4 拼合而成。
+頁面規格也是 20x20. 整版共 800 字。不支持 B4 紙張。
+\item[作文紙] ygenko A3 紙張的增强版，用於對考試作文紙的模擬。頁面規格 20x23. 
+行高 30 pt。整版共 920 字。
+如果調用帶有章標題的頁面佈局（\verb+\pagestyle{chapter}+），則整版共 880 字。
+\item[ribbon] 日式 JIS B4 作文紙。 每葉 20 欄 20 行，每行 20 字，欄寬 42 pt。
+對於所有帶網格的版式，使用 \verb+\空行+ 產生一個空行，此命令後多敲兩個 Enter ，
+使下一行成爲一個段落。否則將引起異常。此命令等效爲\verb+\vskip\baselineskip+；
+使用 \verb+\空一格+ 、 \verb+\空兩格+ 對行首進行空格處理。
+默認空格請設置爲 0 pt，否則段落首行將無法對齊。
+\item[test] 大唐西域記式卷子本。它的技術難點在於尋找文本的起點，以及網格的起點。
+網格寬度即爲行高 35 pt，網格從右往左繪製。第一條網格綫即爲版心的右側界限。 
+每製作一次卷子，都需要重新定義 pagesizedef.clo 中對應的平衡參數。
+\item[橫向頁碼] 或“横向頁碼”“橫頁碼”“横頁碼”“yokopage”：調用頁脚頁碼。默認無頁脚。
+\item[名字] 或“ID”“名前”“myname”：調用頁脚簽名。需要“橫向頁碼”支持。
+\item[顔色選項] 詳見 colordef.clo，其中漢字選項多爲書眉漢字顔色定義。假名選項為網格顔色。
+\end{biao}
+\end{minipage}
+\end{center}
+
+
+\end{document}

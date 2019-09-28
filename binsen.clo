@@ -1,0 +1,148 @@
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesFile{binsen.clo}
+  [2019/09/26 v1.0 (binsen column tikz definition)]
+
+\if@BV	%for B5 便牋
+% 定義奇數頁糸欄
+\def\@ribonodd{%
+	\foreach \i in {49,84,...,435}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.7)--(\i pt, 23);}}% 奇數頁絲欄
+
+% 定義偶數頁糸欄
+\def\@riboneven{%
+	\foreach \i in {49,84,...,435}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.7)--(\i pt, 23);}}% 絲欄
+
+% 定義\chapter{}的首頁糸欄有標題不畫欄線。
+\def\@chribonodd{%
+	\foreach \i in {49,84,...,399}{%
+		\draw [ color=\@riboncolor ] (\i pt, 2.7)--(\i pt, 23);}}% 奇數首頁絲欄
+
+% 定義奇數頁内外邉框
+\def\@kasenodd{%
+	\draw [line width=3pt, color=\@columncolor ]  (1.5,2.5) rectangle (16.7,23.2);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (1.7,2.7) rectangle (16.5,23);% 內框
+	}
+% 定義偶數頁内外邉框
+\def\@kaseneven{%
+	\draw [line width=3pt, color=\@columncolor ]  (1.5,2.5) rectangle (16.7,23.2);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (1.7,2.7) rectangle (16.5,23);% 內框
+	}
+
+% 定義奇數頁和偶數頁的水平頁碼，pdfm 啓用
+\def\@pdfmpageodd{%
+\ifthenelse{\value{page} < 1}{%
+	\node [right,]  at%
+		(1.6,2.1) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [right,]  at%
+		(1.6,2.1) {\hbox{\yoko\szx\mgfamily~第~\@arabic\c@page~頁\qquad\@signatureodd}};}
+	}
+\def\@pdfmpageven{%
+\ifthenelse{\value{page} < 1}{%
+	\node [left,]  at%
+		(16.5,2.1) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [left,]  at%
+		(16.5,2.1) {\hbox{\yoko\szx\mgfamily\@signatureven\qquad~第~\@arabic\c@page~頁}};}
+	}
+
+% 定義奇數頁和偶數頁的垂直頁碼，pdfm 不啓用
+\def\@ppageodd{%
+	\node [below,]  at%
+		(1.1,21) {\hbox{\tate\szx\mgfamily\leftmark}};  % 章標題
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(1.1,5) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(1.1,5) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+\def\@ppageven{%
+	\node [below,]  at%
+		(17.1,21) {\hbox{\tate\szx\mgfamily\@maintitle}};  % 書名
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(17.1,5) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(17.1,5) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+
+\fi
+
+\if@AIV	%for A4 便牋
+% 定義奇數頁糸欄
+\def\@ribonodd{%
+	\foreach \i in {52.64,87.64,...,508}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.7)--(\i pt, 27);}}% 奇數頁絲欄
+
+% 定義偶數頁糸欄
+\def\@riboneven{%
+	\foreach \i in {52.64,87.64,...,508}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.7)--(\i pt, 27);}}% 絲欄
+
+% 定義\chapter{}的首頁糸欄有標題不畫欄線。
+\def\@chribonodd{%
+	\foreach \i in {52.64,87.64,...,473}{%
+		\draw [ color=\@riboncolor ] (\i pt, 2.7)--(\i pt, 27);}}% 奇數首頁絲欄
+
+% 定義奇數頁内外邉框
+\def\@kasenodd{%
+	\draw [line width=3pt, color=\@columncolor ]  (1.656,2.5) rectangle (19.344,27.2);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (1.856,2.7) rectangle (19.144,27);% 內框
+	}
+% 定義偶數頁内外邉框
+\def\@kaseneven{%
+	\draw [line width=3pt, color=\@columncolor ]  (1.656,2.5) rectangle (19.344,27.2);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (1.856,2.7) rectangle (19.144,27);% 內框
+	}
+% 定義奇數頁和偶數頁的水平頁碼，pdfm 啓用
+\def\@pdfmpageodd{%
+\ifthenelse{\value{page} < 1}{%
+	\node [right,]  at%
+		(1.6,2.1) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [right,]  at%
+		(1.6,2.1) {\hbox{\yoko\szx\mgfamily~第~\@arabic\c@page~頁\qquad\@signatureodd}};}
+	}
+\def\@pdfmpageven{%
+\ifthenelse{\value{page} < 1}{%
+	\node [left,]  at%
+		(19.4,2.1) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [left,]  at%
+		(19.4,2.1) {\hbox{\yoko\szx\mgfamily\@signatureven\qquad~第~\@arabic\c@page~頁}};}
+	}
+
+% 定義奇數頁和偶數頁的垂直頁碼，pdfm 不啓用
+\def\@ppageodd{%
+	\node [below,]  at%
+		(1.2,24) {\hbox{\tate\szx\mgfamily\leftmark}};  % 章標題
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(1.2,5) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(1.2,5) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+\def\@ppageven{%
+	\node [below,]  at%
+		(19.8,24) {\hbox{\tate\szx\mgfamily\@maintitle}};  % 書名
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(19.8,5) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(19.8,5) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+
+\fi
+
+\endinput
+
+% end of binsen.clo

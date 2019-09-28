@@ -1,0 +1,158 @@
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesFile{pagesizedef.clo}
+  [2019/09/22 v1.0 (page size option)]
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%  判斷是否使用騎縫書眉  %%%%%%%%%%%%%%%%%%%%
+\if@BV % 默認 B5 紙
+\setlength{\textwidth}{198 mm}
+\setlength{\textheight}{145mm}
+\setlength{\topmargin}{ 10 pt}
+\if@pdfm
+\setlength{\oddsidemargin} {-46 pt}   %修正數據
+\setlength{\evensidemargin}{- 2 pt}   %修正數據
+%
+\else % for binsen
+\setlength{\oddsidemargin} {-24 pt}   %修正數據
+\setlength{\evensidemargin}{-22 pt}   %修正數據
+\fi\fi
+
+\if@AIV  % 再討論 A4 的情況，騎縫書眉糸欄的數據要重寫
+\setlength{\textwidth}{ 240 mm}
+\setlength{\textheight}{173 mm}
+\setlength{\topmargin}{ 10 pt}
+\if@pdfm
+\setlength{\oddsidemargin} {-48 pt}   %修正數據
+\setlength{\evensidemargin}{-9 pt}   %修正數據
+%
+\else  % for binsen
+\setlength{\oddsidemargin} {-30 pt}   %修正數據
+\setlength{\evensidemargin}{-30 pt}   %修正數據
+\fi\fi
+%%%%%%%%%%%%%%%%  判斷是否使用騎縫書眉  %%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%  判斷使用作文紙的紙張  %%%%%%%%%%%%%%%%%%%%
+\if@tgenko
+\if@AIV % A4 紙
+\setlength{\voffset}{ 0 mm}
+\setlength{\hoffset}{ 0 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{166 mm}
+\setlength{\textheight}{247 mm}
+\setlength{\topmargin}{ -8 pt}
+\setlength{\oddsidemargin} { -10 pt }   %修正數據
+\setlength{\evensidemargin}{ -10 pt }   %修正數據
+\fi 
+\if@BV % B5 紙，所有尺寸的參數均來自 A4 紙，
+       % 只對漢字進行縮放到0.866倍（卽將版面由297x210mm縮放至257x182mm）
+       % 字體參數、書眉，照搬 A4 即可。
+\mag 866
+\setlength{\voffset}{ 22 mm}
+\setlength{\hoffset}{ -3 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{166 mm}
+\setlength{\textheight}{247 mm}
+\setlength{\topmargin}{ -87 pt}
+\setlength{\oddsidemargin} { -10 pt }   %修正數據
+\setlength{\evensidemargin}{ -10 pt }   %修正數據
+\fi
+\if@AV 
+\mag 900
+\setlength{\voffset}{ 15 mm}
+\setlength{\hoffset}{ -5 mm}
+\setlength{\parskip}{0 mm}
+\setlength{\textwidth}{124 mm}
+\setlength{\textheight}{185 mm}
+\setlength{\topmargin}{ -63 pt}
+\setlength{\oddsidemargin} { -9 pt }   %修正數據
+\setlength{\evensidemargin}{ -9 pt }   %修正數據
+\fi\fi
+
+\if@ygenko
+\if@AIII % A3 紙
+\if@exampaper
+\setlength{\voffset}{ 0 mm}
+\setlength{\hoffset}{ 9 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{362 mm}
+\setlength{\textheight}{243 mm}
+\setlength{\topmargin}{ 15 pt}
+\setlength{\columnsep}{30 mm}
+\setlength{\oddsidemargin} { -8 pt }   %修正數據
+\else
+\setlength{\voffset}{ 0 mm}
+\setlength{\hoffset}{ 9 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{362 mm}
+\setlength{\textheight}{247 mm}
+\setlength{\topmargin}{ 10 pt}
+\setlength{\columnsep}{30 mm}
+\setlength{\oddsidemargin} { -8 pt }   %修正數據
+\fi
+\fi
+
+\if@AIV % A4 紙
+\setlength{\voffset}{ 0 mm}
+\setlength{\hoffset}{ 0 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{166 mm}
+\setlength{\textheight}{247 mm}
+\setlength{\topmargin}{ 10 pt}
+\setlength{\oddsidemargin} { -9 pt }   %修正數據
+\setlength{\evensidemargin}{ -11 pt }   %修正數據
+\fi 
+\if@BV % B5 紙，所有尺寸的參數均來自 A4 紙，
+       % 只對漢字進行縮放到0.866倍（卽將版面由297x210mm縮放至257x182mm）
+       % 字體參數、書眉，照搬 A4 即可。
+\mag 866
+\setlength{\voffset}{ 36 mm}
+\setlength{\hoffset}{ -3 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{166 mm}
+\setlength{\textheight}{247 mm}
+\setlength{\topmargin}{ -104 pt}
+\setlength{\oddsidemargin} { -10 pt }   %修正數據
+\setlength{\evensidemargin}{ -10 pt }   %修正數據
+\fi
+\if@AV 
+\mag 900
+\setlength{\voffset}{ 20 mm}
+\setlength{\hoffset}{ -4 mm}
+\setlength{\parskip}{0 mm}
+\setlength{\textwidth}{124 mm}
+\setlength{\textheight}{185 mm}
+\setlength{\topmargin}{ -63 pt}
+\setlength{\oddsidemargin} { -12 pt }   %修正數據
+\setlength{\evensidemargin}{ -12 pt }   %修正數據
+\fi\fi
+
+\if@ribbon % 日式 JIS B4 作文紙。待修正。
+\setlength{\voffset}{ 3 mm}
+\setlength{\hoffset}{ 0 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{588 pt}
+\setlength{\textheight}{860 pt}
+\setlength{\topmargin}{ -18 pt}
+\setlength{\oddsidemargin} { -4 pt }   %修正數據
+\fi
+
+
+\if@test % 大唐西域記式卷子本。待修正。
+\setlength{\voffset}{ 0 mm}
+\setlength{\hoffset}{ 0 mm}
+\setlength{\parskip}{0mm}
+\setlength{\textwidth}{510 pt}
+\setlength{\textheight}{4000 mm}
+\setlength{\topmargin}{ 38 pt}
+\setlength{\oddsidemargin} { 205 pt }   %修正數據
+\fi
+
+
+%%%%%%%%%%%%%%%%  判斷使用作文紙的紙張  %%%%%%%%%%%%%%%%%%%%
+
+\makeatother
+
+\endinput
+
+% end of page size optins, file 'pagesizedef.clo'

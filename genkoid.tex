@@ -1,0 +1,15 @@
+%% genkouid.tex
+%% \名字{}的{}内不允許再出現{}的命令，如\hspace{5mm}請用\hskip5mm代替。
+%% 或者先定義： 	\def\SPACE{\hspace{5mm}} 
+%% 再再底下使用：	\signatureodd{子\SPACE 康}
+%% EX.  \signatureodd{Up\LaTeX ers}
+\if@yoko % 橫向書寫
+\signatureodd {子\hskip1mm康\qquad\today}   % 橫書 奇數頁 簽名
+\signatureven {\today\qquad 子\hskip1mm康}  % 橫書 偶數頁 簽名
+\else    % 垂直書寫
+\signatureven {子\hskip1mm康\qquad\today}   % 直書 偶數頁 底部水平 簽名
+\signatureodd {\today\qquad 子\hskip1mm康}  % 直書 奇數頁 底部水平 簽名
+\fi
+
+\endinput
+ 

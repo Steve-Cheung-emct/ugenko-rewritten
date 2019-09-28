@@ -1,0 +1,197 @@
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesFile{tgenko.clo}
+  [2019/09/26 v1.0 (tgenko column tikz definition)]
+
+% A4 & B5 commom definition
+% 定義奇數頁糸欄
+\def\@ribonodd{%
+\foreach \q in {78,113,...,771}{%
+	\foreach \k in {80.693,128.693,...,530}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+24 pt, \k+24 pt);}}
+	\foreach \i in {78,113,...,771}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.0)--(\i pt, 536.6929pt);}
+	\foreach \j in {102,137,...,771}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 2.0)--(\j pt, 536.6929pt);}
+		}% 奇數頁絲欄
+
+% 定義偶數頁糸欄
+\def\@riboneven{%
+\foreach \q in {78,113,...,771}{%
+	\foreach \k in {80.693,128.693,...,530}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+24 pt, \k+24 pt);}}
+	\foreach \i in {78,113,...,771}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.0)--(\i pt, 536.6929pt);}
+	\foreach \j in {102,137,...,771}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 2.0)--(\j pt, 536.6929pt);}
+}% 絲欄
+
+% 定義\chapter{}的首頁糸欄有標題不畫欄線。
+\def\@chribonodd{%
+\foreach \q in {78,113,...,700}{%
+	\foreach \k in {80.693,128.693,...,530}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+24 pt, \k+24 pt);}}
+	\foreach \i in {78,113,...,700}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.0)--(\i pt, 536.6929pt);}
+	\foreach \j in {102,137,...,700}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 2.0)--(\j pt, 536.6929pt);}
+		\draw [ color=\@riboncolor ] (765 pt, 2.0)--(765 pt, 536.6929pt);
+		\draw [ color=\@riboncolor ] (708 pt, 2.0)--(708 pt, 536.6929pt);
+}% 奇數首頁絲欄
+
+% 定義奇數頁内外邉框
+\def\@kasenodd{%
+	\draw [line width=3pt, color=\@columncolor ]  (2.2,1.8) rectangle (27.5,542.3622pt);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (2.4,2.0) rectangle (27.3,536.6929pt);% 內框
+	}
+% 定義偶數頁内外邉框
+\def\@kaseneven{%
+	\draw [line width=3pt, color=\@columncolor ]  (2.2,1.8) rectangle (27.5,542.3622pt);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (2.4,2.0) rectangle (27.3,536.6929pt);% 內框
+	}
+
+% 定義奇數頁和偶數頁的水平頁碼，pdfm 啓用
+\def\@pdfmpageodd{%
+\ifthenelse{\value{page} < 1}{%
+	\node [right,]  at%
+		(2.2,1.5) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [right,]  at%
+		(2.2,1.5) {\hbox{\yoko\szx\mgfamily~第~\@arabic\c@page~頁\qquad\@signatureodd}};}
+	}
+\def\@pdfmpageven{%
+\ifthenelse{\value{page} < 1}{%
+	\node [left,]  at%
+		(27.7,1.5 {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [left,]  at%
+		(27.7,1.5) {\hbox{\yoko\szx\mgfamily\@signatureven\qquad~第~\@arabic\c@page~頁}};}
+	}
+
+% 定義奇數頁和偶數頁的垂直頁碼，pdfm 不啓用
+\def\@ppageodd{%
+	\node [below,]  at%
+		(1.8,18) {\hbox{\tate\szx\mgfamily\leftmark}};  % 章標題
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(1.8,3) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(1.8,3) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+\def\@ppageven{%
+	\node [below,]  at%
+		(27.9,18) {\hbox{\tate\szx\mgfamily\@maintitle}};  % 書名
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(27.9,3) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(27.9,3) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+
+% definition for A5
+\if@AV
+% 定義奇數頁糸欄
+\def\@ribonodd{%
+\foreach \q in {78,113,...,568}{%
+	\foreach \k in {80.693,128.693,...,400}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+24 pt, \k+24 pt);}}
+	\foreach \i in {78,113,...,568}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.0)--(\i pt, 416.6929pt);}
+	\foreach \j in {102,137,...,592}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 2.0)--(\j pt, 416.6929pt);}
+		}% 奇數頁絲欄
+
+% 定義偶數頁糸欄
+\def\@riboneven{%
+\foreach \q in {78,113,...,568}{%
+	\foreach \k in {80.693,128.693,...,400}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+24 pt, \k+24 pt);}}
+	\foreach \i in {78,113,...,568}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.0)--(\i pt, 416.6929pt);}
+	\foreach \j in {102,137,...,592}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 2.0)--(\j pt, 416.6929pt);}
+}% 絲欄
+
+% 定義\chapter{}的首頁糸欄有標題不畫欄線。
+\def\@chribonodd{%
+\foreach \q in {78,113,...,532}{%
+	\foreach \k in {80.693,128.693,...,400}{%
+		\draw [ color=\@riboncolor ] (\q pt, \k pt) rectangle (\q+24 pt, \k+24 pt);}}
+	\foreach \i in {78,113,...,533}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\i pt, 2.0)--(\i pt, 416.6929pt);}
+	\foreach \j in {102,137,...,533}{%
+			% 起始點 49+35pt。从左往右
+		\draw [ color=\@riboncolor ] (\j pt, 2.0)--(\j pt, 416.6929pt);}
+		\draw [ color=\@riboncolor ] (592 pt, 2.0)--(592 pt, 416.6929pt);
+		\draw [ color=\@riboncolor ] (533 pt, 2.0)--(533 pt, 416.6929pt);
+}% 奇數首頁絲欄
+
+% 定義奇數頁内外邉框
+\def\@kasenodd{%
+	\draw [line width=1pt, color=\@columncolor ]  (2.2,1.8) rectangle (609 pt,422.3622 pt);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (2.4,2.0) rectangle (603 pt,416.6929 pt);% 內框
+	}
+% 定義偶數頁内外邉框
+\def\@kaseneven{%
+	\draw [line width=1pt, color=\@columncolor ]  (2.2,1.8) rectangle (609 pt,422.3622 pt);% 外框
+	\draw [line width=1pt, color=\@riboncolor ]  (2.4,2.0) rectangle (603 pt,416.6929 pt);% 內框
+	}
+% 定義奇數頁和偶數頁的水平頁碼，pdfm 啓用
+\def\@pdfmpageodd{%
+\ifthenelse{\value{page} < 1}{%
+	\node [right,]  at%
+		(2.5,1.5) {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [right,]  at%
+		(2.5,1.5) {\hbox{\yoko\szx\mgfamily~第~\@arabic\c@page~頁\qquad\@signatureodd}};}
+	}
+\def\@pdfmpageven{%
+\ifthenelse{\value{page} < 1}{%
+	\node [left,]  at%
+		(21,1.5 {\hbox{\yoko\szx\mgfamily~（第~\zhnumber{\@arabic\c@szpage}~頁）}\stepcounter{szpage}};}
+	{\node [left,]  at%
+		(21,1.5) {\hbox{\yoko\szx\mgfamily\@signatureven\qquad~第~\@arabic\c@page~頁}};}
+	}
+
+% 定義奇數頁和偶數頁的垂直頁碼，pdfm 不啓用
+\def\@ppageodd{%
+	\node [below,]  at%
+		(1.8,13) {\hbox{\tate\szx\mgfamily\leftmark}};  % 章標題
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(1.8,3) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(1.8,3) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+\def\@ppageven{%
+	\node [below,]  at%
+		(21.8,13) {\hbox{\tate\szx\mgfamily\@maintitle}};  % 書名
+\ifthenelse{\value{page} < 1}{%
+	\node [above,]  at%
+		(21.8,3) {\hbox{\tate\szx\mgfamily%
+		（{第}~\zhnumber{\@arabic\c@szpage}~{頁}）}\stepcounter{szpage}};}
+	{\node [above,]  at%
+		(21.8,3) {\hbox{\tate\szx\mgfamily~\kansuji\c@page~%
+		（{第}~\zhnumber{\@arabic\c@ppage}~{頁}）}\stepcounter{ppage}};}
+	}
+\fi
+\if@BIV
+\message{Ｂ4 縦書きはサポートされていません。Ａ４を使用します。(不支持B4，請用A4.)}
+\fi
+
+\endinput
+
+% end of tgenko.clo
